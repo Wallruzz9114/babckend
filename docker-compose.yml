@@ -5,11 +5,25 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    entrypoint: ['/usr/src/app/entrypoint.sh']
     volumes:
       - .:/usr/src/app
     ports:
       - 5001:5000
     environment:
-      - FLASK_APP=server/__init__.py
-      - FLASK_ENV=development
-      - APP_SETTINGS=server.config.DevelopmentConfig
+      - FLASK_APP=${FLASK_APP}
+      - FLASK_ENV=${FLASK_ENV}
+      - APP_SETTINGS=${APP_SETTINGS}
+      - DATABASE_URL=${DATABASE_URL}
+      - DATABASE_TEST_URL=${DATABASE_TEST_URL}
+    depends_on:
+      - server-db
+  server-db:
+    build:
+      context: ./server/database
+      dockerfile: Dockerfile
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
