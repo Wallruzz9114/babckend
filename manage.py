@@ -1,7 +1,9 @@
 from flask.cli import FlaskGroup
-from server import app, db
+from server import create_app, db
+from server.api.entities.user import User
 
-cli = FlaskGroup(app)
+app = create_app()
+cli = FlaskGroup(create_app=create_app)
 
 
 @cli.command('recreate_db')

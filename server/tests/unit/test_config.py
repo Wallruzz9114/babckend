@@ -1,5 +1,8 @@
 import os
 
+from dotenv import load_dotenv
+load_dotenv()
+
 
 def test_development_config(test_app):
     test_app.config.from_object('server.config.DevelopmentConfig')

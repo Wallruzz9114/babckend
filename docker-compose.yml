@@ -11,7 +11,6 @@ services:
     ports:
       - 5001:5000
     environment:
-      - FLASK_APP=${FLASK_APP}
       - FLASK_ENV=${FLASK_ENV}
       - APP_SETTINGS=${APP_SETTINGS}
       - DATABASE_URL=${DATABASE_URL}
